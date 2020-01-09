@@ -1,26 +1,43 @@
 function submitToDiscord(message) {
   
   var formResponse = message.response;
+  //Grabs the items in JSON format
   var itemResponses = formResponse.getItemResponses();
+  
+  //Used for outputting to Discord Channel
   var channelMsg;
-
+  
+  //Goes through each question and answer from the form
   for (i in itemResponses){
     Logger.log("getItem().getTitle()=%s, getResponse()=%s", itemResponses[i].getItem().getTitle(), itemResponses[i].getResponse());
+  
+  //Create a variable for each question you have on your form
+    var Name, Age, Location; 
     
-    var Name; 
-   //For each question in the form, create an if statement like the one below
-    if (itemResponses[i].getItem().getTitle() == "Name")
+  //For each question in the form, create an if statement like the one below. The condition needs to be the exact question.
+    if (itemResponses[i].getItem().getTitle() == "Name?")
     {
+   //Set that variable to the response given
       Name = itemResponses[i].getResponse();
     }
     
+     if (itemResponses[i].getItem().getTitle() == "Your age?")
+    {
+      Age = itemResponses[i].getResponse();
+    }
+     if (itemResponses[i].getItem().getTitle() == "Where do you live?")
+    {
+      Location = itemResponses[i].getResponse();
+    }
+    
     //Formatting what Discord will output, use the markdown for Discord 
-    channelMsg = "●・○・●・○・●・○・●・○・● \n**Name**: " + Name;
+    channelMsg = "●・○・●・○・●・○・●・○・● \n**Name**: " + Name + "\n**Age**: " + Age +  "\n**Location**: " + Location;
   }
 
   var discordUrl = 'DISCORD_WEBHOOK_URL';
   var payload = JSON.stringify({content: channelMsg });
 
+//API call to Discord to post the information on the channel
   var params = {
     headers: {
       'Content-Type': 'application/json',
@@ -33,7 +50,7 @@ function submitToDiscord(message) {
 
   var response = UrlFetchApp.fetch(discordUrl, params);
   
-  
+  //Sends an email whenever an error occurs after user submits a form
   if(response.getResponseCode() == "204.0" || response.getResponseCode() == "200" )
   {
     Logger.log("Seems ok"); 
