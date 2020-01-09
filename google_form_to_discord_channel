@@ -59,9 +59,9 @@ function submitToDiscord(message) {
   {
      MailApp.sendEmail({
     to: "YOUR_EMAIL",
-    cc: "firestperson@gmail.com, secondperson@gmail.com",
+    cc: "firstperson@gmail.com, secondperson@gmail.com",
     subject: "Form Error",
-       htmlBody: "Hi! An error occured while trying to send a response tm your discord "  + "<br><br>" + "Error: " +response +  "<br><br>" + payload
+       htmlBody: "Hi! An error occured while trying to send a response to your discord "  + "<br><br>" + "Error: " +response +  "<br><br>" + payload
   });
   }
 
