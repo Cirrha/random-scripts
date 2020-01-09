@@ -7,15 +7,15 @@ function submitToDiscord(message) {
   for (i in itemResponses){
     Logger.log("getItem().getTitle()=%s, getResponse()=%s", itemResponses[i].getItem().getTitle(), itemResponses[i].getResponse());
     
-    var Name, channelMsg; 
+    var Name; 
    //For each question in the form, create an if statement like the one below
     if (itemResponses[i].getItem().getTitle() == "Name")
     {
       Name = itemResponses[i].getResponse();
     }
     
-    //Formatting what Discord will output
-    channelMsg = "\n\n ●・○・●・○・●・○・●・○・● \n**Name**: " + Name;
+    //Formatting what Discord will output, use the markdown for Discord 
+    channelMsg = "●・○・●・○・●・○・●・○・● \n**Name**: " + Name;
   }
 
   var discordUrl = 'DISCORD_WEBHOOK_URL';
